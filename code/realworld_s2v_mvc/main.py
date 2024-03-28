@@ -1,6 +1,6 @@
 import numpy as np
 import networkx as nx
-import cPickle as cp
+import pickle as cp
 import random
 import ctypes
 import os
@@ -14,7 +14,7 @@ sys.path.append( '%s/../memetracker' % os.path.dirname(os.path.realpath(__file__
 from meme import *
 
 def gen_new_graphs(opt):
-    print 'generating new training graphs'
+    print('generating new training graphs')
     sys.stdout.flush()
     api.ClearTrainGraphs()
     for i in tqdm(range(100)):
@@ -30,7 +30,7 @@ def greedy(G):
     covered_set = set()
     numCoveredEdges = 0
     idxes = range(nx.number_of_nodes(G))
-    idxes = sorted(idxes, key=lambda x: len(nx.neighbors(G, x)), reverse=True)
+    idxes = sorted(idxes, key=lambda x: len(list(nx.neighbors(G, x))), reverse=True)
     pos = 0
     while numCoveredEdges < nx.number_of_edges(G):
         new_action = idxes[pos]
@@ -39,7 +39,7 @@ def greedy(G):
             if neigh not in covered_set:
                 numCoveredEdges += 1
         pos += 1
-    print 'done'
+    print('done')
     return len(covered_set)
 
 if __name__ == '__main__':
@@ -52,7 +52,7 @@ if __name__ == '__main__':
     g_undirected, _ = build_full_graph('%s/InfoNet5000Q1000NEXP.txt' % opt['data_root'],'undirected')
     print(nx.number_of_nodes(g_undirected))
     print(nx.number_of_edges(g_undirected))
-    print greedy(g_undirected)
+    print(greedy(g_undirected))
 
     api.InsertGraph(g_undirected, is_test=True)
 
@@ -74,7 +74,7 @@ if __name__ == '__main__':
 
         if iter % 300 == 0:
             frac = api.lib.Test(0)
-            print 'iter', iter, 'eps', eps, 'average pct of vc: ', frac
+            print('iter', iter, 'eps', eps, 'average pct of vc: ', frac)
             sys.stdout.flush()
             model_path = '%s/iter_%d.model' % (opt['save_dir'], iter)
             api.SaveModel(model_path)
@@ -83,3 +83,4 @@ if __name__ == '__main__':
             api.TakeSnapshot()
 
         api.lib.Fit()
+
