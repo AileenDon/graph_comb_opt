@@ -14,7 +14,7 @@ class MvcLib(object):
         self.lib.Test.restype = ctypes.c_double
         self.lib.GetSol.restype = ctypes.c_double
         arr = (ctypes.c_char_p * len(args))()
-        arr[:] = args
+        arr[:] = [arg.encode("utf-8") for arg in args]
         self.lib.Init(len(args), arr)
         self.ngraph_train = 0
         self.ngraph_test = 0
