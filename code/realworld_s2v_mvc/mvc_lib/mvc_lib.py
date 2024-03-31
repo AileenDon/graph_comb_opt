@@ -50,10 +50,12 @@ class MvcLib(object):
         self.lib.InsertGraph(is_test, t, n_nodes, n_edges, e_froms, e_tos)
     
     def LoadModel(self, path_to_model):
+        path_to_model = bytes(path_to_model, 'utf-8') + b'\0'
         p = ctypes.cast(path_to_model, ctypes.c_char_p)
         self.lib.LoadModel(p)
 
     def SaveModel(self, path_to_model):
+        path_to_model = bytes(path_to_model, 'utf-8') + b'\0'
         p = ctypes.cast(path_to_model, ctypes.c_char_p)
         self.lib.SaveModel(p)
 
