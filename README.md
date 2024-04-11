@@ -11,14 +11,14 @@ From left to right: (1) S2V-DQN (our method), (2) node-degree heuristic, (3) edg
 
 Get the source code, and install all the dependencies. 
 
-    git clone --recursive https://github.com/Hanjun-Dai/graph_comb_opt
+    git clone https://github.com/grivera64/graphnn.git
     
     build the graphnn library with the instructions here:
       https://github.com/Hanjun-Dai/graphnn
     
-For each task, build the dynamic library. For example, to build the Minimum Vertex Cover library:
+For each task, build the real world dynamic library. For example, to build the Minimum Vertex Cover library:
 
-    cd code/s2v_mvc/mvc_lib/
+    cd code/realworld_s2v_mvc/mvc_lib/
     cp Makefile.example Makefile
     
     customize your Makefile if necessary
@@ -42,9 +42,9 @@ The above code will generate 1000 test graphs under /path/to/the/project/data/mv
 
 ### Training with n-step Q-learning
 
-Navigate to the MVC folder and run the training script. Modify the script to change the parameters. 
+Navigate to the realworld_s2v_mvc folder and run the training script. Modify the script to change the parameters. 
 
-    cd code/s2v_mvc
+    cd code/realworld_s2v_mvc
     ./run_nstep_dqn.sh
     
 By default it will save all the model files, the logs under currentfolder/results. Note that the code will generate the data on the fly, including the validation dataset. So the training code itself doesn't rely on the data generator. 
