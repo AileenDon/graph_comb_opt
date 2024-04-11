@@ -1,9 +1,18 @@
 # graph_comb_opt 
 Implementation of "Learning Combinatorial Optimization Algorithms over Graphs" (https://arxiv.org/abs/1704.01665)
 
+> (Note: This is **forked** from [Hanjun-Dai/graph_comb_opt](https://github.com/Hanjun-Dai/graph_comb_opt))
+> 
+> This fork was created in order to run the paper's code within
+> GitHub's Codespace feature. As GitHub Codespaces do not have
+> GPU's, we had to update the code to use CPU_ONLY. We
+> additionally updated the code to work with recent versions
+> of python. Please check out the original paper here:
+> [https://arxiv.org/abs/1704.01665](https://arxiv.org/abs/1704.01665) 
+
 Step-by-step demo of MVC solution found by different methods.
 From left to right: (1) S2V-DQN (our method), (2) node-degree heuristic, (3) edge-degree heuristic
-![demo](https://github.com/Hanjun-Dai/graph_comb_opt/blob/master/visualize/mvc-40-50.gif)
+![demo](https://github.com/grivera64/graph_comb_opt/blob/csudh-fork/visualize/mvc-40-50.gif)
 
 # 1. build
 
@@ -11,10 +20,15 @@ From left to right: (1) S2V-DQN (our method), (2) node-degree heuristic, (3) edg
 
 Get the source code, and install all the dependencies. 
 
+    # Clone this repository 
+    git clone https://github.com/grivera64/graph_comb_opt.git
+
+    # Clone graphnn inside of the repository as a dependency
+    cd graph_comb_opt
     git clone https://github.com/grivera64/graphnn.git
     
     build the graphnn library with the instructions here:
-      https://github.com/Hanjun-Dai/graphnn
+      https://github.com/grivera64/graphnn
     
 For each task, build the real world dynamic library. For example, to build the Minimum Vertex Cover library:
 
