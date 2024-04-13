@@ -14,7 +14,7 @@ class Tsp2dLib(object):
         self.lib.Test.restype = ctypes.c_double
         self.lib.GetSol.restype = ctypes.c_double
         arr = (ctypes.c_char_p * len(args))()
-        arr[:] = args
+        arr[:] = [arg.encode("utf-8") for arg in args]
         self.lib.Init(len(args), arr)
         self.ngraph_train = 0
         self.ngraph_test = 0
@@ -49,10 +49,12 @@ class Tsp2dLib(object):
         self.lib.InsertGraph(is_test, t, n_nodes, coor_x, coor_y)
     
     def LoadModel(self, path_to_model):
+        path_to_model = bytes(path_to_model, 'utf-8') + b'\0'
         p = ctypes.cast(path_to_model, ctypes.c_char_p)
         self.lib.LoadModel(p)
 
     def SaveModel(self, path_to_model):
+        path_to_model = bytes(path_to_model, 'utf-8') + b'\0'
         p = ctypes.cast(path_to_model, ctypes.c_char_p)
         self.lib.SaveModel(p)
 

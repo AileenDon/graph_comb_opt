@@ -2,14 +2,20 @@ GNN_HOME=../../../graphnn
 
 include $(GNN_HOME)/make_common
 
-lib_dir = $(GNN_HOME)/build/lib
+ifeq ($(USE_GPU), 1)
+    lib_dir = $(GNN_HOME)/build/lib
+else
+    lib_dir = $(GNN_HOME)/build_cpuonly/lib
+endif
 gnn_lib = $(lib_dir)/libgnn.a
 
-include_dirs = $(CUDA_HOME)/include $(MKL_ROOT)/include $(GNN_HOME)/include ./include
+include_dirs = $(CUDA_HOME)/include $(MKL_ROOT) $(GNN_HOME)/include ./include
 
 CXXFLAGS += $(addprefix -I,$(include_dirs)) -Wno-unused-local-typedef
-CXXFLAGS += -fPIC -DUSE_GPU
-CXXFLAGS += -DGPU_MODE
+CXXFLAGS += -fPIC
+ifeq ($(USE_GPU), 1)
+    CXXFLAGS += -DUSE_GPU -DGPU_MODE
+endif
 cpp_files = $(shell $(FIND) src/lib -name "*.cpp" -printf "%P\n")
 cxx_obj_files = $(subst .cpp,.o,$(cpp_files))
 
@@ -37,3 +43,4 @@ clean:
 	rm -rf build
 
 -include $(DEPS)
+

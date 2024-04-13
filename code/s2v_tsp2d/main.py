@@ -1,6 +1,6 @@
 import numpy as np
 import networkx as nx
-import cPickle as cp
+import pickle as cp
 import random
 import ctypes
 import os
@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
     model_file = find_model_file(opt)
     if model_file is not None:
-        print 'loading', model_file
+        print('loading', model_file)
         sys.stdout.flush()
         api.LoadModel(model_file)
 
@@ -111,7 +111,7 @@ if __name__ == '__main__':
             frac = 0.0
             for idx in range(n_valid):
                 frac += api.lib.Test(idx)
-            print 'iter', iter, 'lr', lr, 'eps', eps, 'average tour length: ', frac / n_valid
+            print('iter', iter, 'lr', lr, 'eps', eps, 'average tour length: ', frac / n_valid)
             sys.stdout.flush()
             model_path = '%s/nrange_%d_%d_iter_%d.model' % (opt['save_dir'], int(opt['min_n']), int(opt['max_n']), iter)
             api.SaveModel(model_path)

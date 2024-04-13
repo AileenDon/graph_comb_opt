@@ -28,7 +28,7 @@ def find_model_file(opt):
                     best_r = r
                     best_it = it
     assert best_it >= 0
-    print 'using iter=', best_it, 'with r=', best_r
+    print('using iter=', best_it, 'with r=', best_r)
     return '%s/nrange_%d_%d_iter_%d.model' % (opt['save_dir'], min_n, max_n, best_it)
 
 def TestSet():
@@ -65,7 +65,7 @@ if __name__ == '__main__':
 
     model_file = find_model_file(opt)
     assert model_file is not None
-    print 'loading', model_file
+    print('loading', model_file)
     sys.stdout.flush()
     api.LoadModel(model_file)
 
@@ -75,7 +75,7 @@ if __name__ == '__main__':
     n_test = 1000
     frac = 0.0
     with open(result_file, 'w') as f_out:
-        print 'testing'
+        print('testing')
         sys.stdout.flush()
         idx = 0
         for g in tqdm(TestSet()):
@@ -92,4 +92,4 @@ if __name__ == '__main__':
 
             idx += 1
 
-    print 'average tour length: ', frac / n_test
+    print('average tour length: ', frac / n_test)
